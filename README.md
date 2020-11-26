@@ -121,7 +121,7 @@ visites suivantes.
 
 **Vérifier le fingerprint**
 
-- Sur le serveur, pour obtenir le fingerprint : 
+Sur le serveur, pour obtenir le fingerprint : 
 
 ``ssh-keygen -lf /etc/ssh/ssh_host_ecdsa_key.pub``
 
