@@ -18,20 +18,20 @@
 
 ## Le Lab
 
-serveur Linux avec 2 clients :
-- 1 Linux via le client SSH
-- 1 Windows via l'utilitaire putty
+Serveur Linux avec 2 clients :
+- 1 Linux via le client ``SSH``
+- 1 Windows via l'utilitaire [putty](https://www.putty.org/)
 
 
 ## Rappels théoriques
 
 **Rappelez le fonctionnement du chiffremennt asymétrique**
 
-La cryptographie asymétrique est un procédé qui intègre deux clés de chiffrement, une clé publique et une clé privée. La clé publique du destinataire est utilisée pour chiffrer et la clef privée du destinataire pour déchiffrer un message. Le même algorithme est utilisé pour les deux clefs.
+La cryptographie asymétrique est un procédé qui intègre deux clés de chiffrement, une **clé publique** et une **clé privée**. La clé publique du destinataire est utilisée pour **chiffrer** et la clef privée du destinataire pour **déchiffrer** un message. Le même algorithme est utilisé pour les deux clefs.
 
 **Comment est assuré l'authentification ?**
 
- puisqu’une clé privée unique a été utilisée pour la signature du message ou du document, son destinataire a la garantie que l'identité du signataire est légitime.
+Puisqu’une clé privée unique a été utilisée pour la signature du message ou du document, son destinataire a la garantie que l'identité du signataire est légitime.
 
 
 
@@ -39,17 +39,15 @@ La cryptographie asymétrique est un procédé qui intègre deux clés de chiffr
 
 ### I. Première connexion 
 
-- démarrage de ma ubuntu
+    - démarrage de ma ubuntu
+    - création compte 
+    - éditez fichier /etc/ssh/sshd_config pour interdire connexion compte root
 
-- création compte (ici pierre)
+Passage de ``PermitRootLogin`` en ``no`` puis ``restart`` du service sshd
 
-- éditez fichier /etc/ssh/sshd_config pour interdire connexion compte root
+**Vérifier que seulement protocole SSHv2 est accepté** 
 
-Passage de PermitRootLogin en no puis restart du service sshd
-
-Vérifier que seulement protocole SSHv2 est accepté 
-
-Ajout de la ligne Protocol 2
+Ajout de la ligne ``Protocol 2``
 
 
 **Consultez les recommandations de l'ANSSI, quelles mesures supplémentaires pourriez vous
@@ -92,6 +90,7 @@ protection de la clé privée utilisateur par mot de passe.
 et au total 31 recommandations
 
 Avec OpenSSH, ce contrôle se fait de plusieurs façons :
+
 • en s’assurant que l’empreinte de la clé présentée par le serveur est la bonne (obtenue
 préalablement avec ssh-keygen -l) ;
 • en rajoutant la clé manuellement dans le fichier known_hosts ;
@@ -99,13 +98,13 @@ préalablement avec ssh-keygen -l) ;
 certification (AC) reconnue par le client.
 
 
-**faites un ssh-keygen**
+**Faites un ssh-keygen**
 
-je la copie colle
+On copie-colle la clef.
 
 ### II. Seconde connexion 
 
-je me connecte avec ssh pierre@192.168.1.24 et répond no
+On se connecte avec ``ssh pierre@192.168.1.24`` et répond ``no``
 
     The authenticity of host '192.168.1.24 (192.168.1.24)' can't be established.
     ECDSA key fingerprint is SHA256:NXOg+pjbszJxGpTKNS2iMqBph2GaJA1nzsQhpriEWXc.
@@ -117,22 +116,22 @@ je me connecte avec ssh pierre@192.168.1.24 et répond no
 OpenSSH adopte par défaut un modèle de sécurité Trust On First Use (TOFU) : lors de la première
 connexion et à défaut de pouvoir authentifier l’hôte, ssh demande confirmation à l’utilisateur qu’il
 s’agit bien de la bonne clé (via son empreinte). Si l’utilisateur confirme que l’empreinte est bonne, ssh
-procèdera à son enregistrement dans le fichier known_hosts afin de permettre sa vérification lors des
+procèdera à son enregistrement dans le fichier ``known_hosts`` afin de permettre sa vérification lors des
 visites suivantes.
 
 **Vérifier le fingerprint**
 
 - Sur le serveur, pour obtenir le fingerprint : 
 
-    ssh-keygen -lf /etc/ssh/ssh_host_ecdsa_key.pub
+``ssh-keygen -lf /etc/ssh/ssh_host_ecdsa_key.pub``
 
 On remarque que sur notre client, pendant la demande de connexion, on obtiens le même fingerprint.
 
 **Que va t-il se passer si vous acceptez la clef publique ?**
 
-Le fichier known_hosts se met à jour avec l'ajout de la clef afin de permettre sa vérification lors des prochaines visites.
+Le fichier ``known_hosts`` se met à jour avec l'ajout de la clef afin de permettre sa vérification lors des prochaines visites.
 
-Je vérifie en allant voir le fichier et je vois que une nouvelle ligne a été ajouté : 
+Je vérifie en allant voir le fichier et je vois qu'une nouvelle ligne a été ajouté : 
 
 ![](https://i.gyazo.com/1b84ded83061dea32af11d4d9c5d88ea.png)
 
