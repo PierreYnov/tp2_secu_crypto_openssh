@@ -8,13 +8,22 @@
 
 # Sommaire 
 
+- [Le lab](#le-lab)
+- [Rappels théoriques](#rappels-theoriques)
+- [Préparation du serveur]()
+    - [I. Première connexion ]()
+    - [II. Seconde connexion ]()
+- [Préparation du client UNIX/BSD]()
+- [Préparation du client Windows]()
 
-Lab : serveur Linux avec 2 clients :
+## Le Lab
+
+serveur Linux avec 2 clients :
 - 1 Linux via le client SSH
 - 1 Windows via l'utilitaire putty
 
 
-## 3.1 Rappels théoriques
+## Rappels théoriques
 
 **Rappelez le fonctionnement du chiffremennt asymétrique**
 
@@ -26,17 +35,9 @@ La cryptographie asymétrique est un procédé qui intègre deux clés de chiffr
 
 
 
-## 3.2 Préparation du serveur :
+## Préparation du serveur 
 
-
-
-### 3.2.1 Conseils 
-
-mode verbeux ssh  = ssh -v
-
-voir les man
-
-### 3.2.2 Première connexion :
+### I. Première connexion 
 
 - démarrage de ma ubuntu
 
@@ -102,7 +103,7 @@ certification (AC) reconnue par le client.
 
 je la copie colle
 
-### 3.2.3 Seconde connexion :
+### II. Seconde connexion 
 
 je me connecte avec ssh pierre@192.168.1.24 et répond no
 
@@ -135,8 +136,8 @@ Je vérifie en allant voir le fichier et je vois que une nouvelle ligne a été 
 
 ![](https://i.gyazo.com/1b84ded83061dea32af11d4d9c5d88ea.png)
 
-## 3.3 Préparation du client UNIX/BSD :
+## Préparation du client UNIX/BSD 
 
 
 
-## 3.4 Préparation du client Windows :
+## Préparation du client Windows 
