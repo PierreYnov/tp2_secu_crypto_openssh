@@ -8,13 +8,13 @@
 
 # Sommaire 
 
-- [Le lab](#le-lab)
-- [Rappels théoriques](#rappels-theoriques)
-- [Préparation du serveur]()
-    - [I. Première connexion ]()
-    - [II. Seconde connexion ]()
-- [Préparation du client UNIX/BSD]()
-- [Préparation du client Windows]()
+- [Le Lab](#le-lab)
+- [Rappels théoriques](#rappels-th%C3%A9oriques)
+- [Préparation du serveur](#pr%C3%A9paration-du-serveur)
+    - [I. Première connexion](#i-premi%C3%A8re-connexion)
+    - [II. Seconde connexion](#ii-seconde-connexion)
+- [Préparation du client UNIX/BSD](#pr%C3%A9paration-du-client-unixbsd)
+- [Préparation du client Windows](#pr%C3%A9paration-du-client-windows)
 
 ## Le Lab
 
