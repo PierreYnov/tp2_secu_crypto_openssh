@@ -20,7 +20,7 @@
 
 Serveur Linux avec 2 clients :
 - 1 Linux via le client ``SSH``
-- 1 Windows via l'utilitaire [putty](https://www.putty.org/)
+- 1 Windows via l'utilitaire [PuTTY](https://www.putty.org/)
 
 
 ## Rappels théoriques
