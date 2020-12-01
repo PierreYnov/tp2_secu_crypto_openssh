@@ -56,15 +56,15 @@ prendre pour renforcer la configuration de votre serveur OpenSSH ?**
 
 
 
-- Il faut s’assurer de la légitimité du serveur contacté avant de poursuivre l’accès. Cela
-passe par l’authentification préalable de la machine au travers de l’empreinte de sa clé
-publique, ou d’un certificat valide et vérifié.
+- Il faut s’assurer de la **légitimité** du serveur contacté avant de poursuivre l’accès. Cela
+passe par l’authentification préalable de la machine au travers de **l’empreinte de sa clé
+publique**, ou d’un **certificat valide et vérifié**.
 
 - Lorsque les clients et les serveurs SSH supportent ``ECDSA``, son usage doit être préféré à
 ``RSA``.
-- L’usage de clés ``DSA`` n’est pas recommandé.
-- Les clés doivent être générées dans un contexte où la source d’aléa est fiable, ou à défaut
-dans un environnement où suffisamment d’entropie a été accumulée
+- **L’usage de clés ``DSA`` n’est pas recommandé.**
+- Les clés doivent être générées dans un contexte où la **source d’aléa** est fiable, ou à défaut
+dans un environnement où suffisamment d’**entropie** a été accumulée.
 - Quelques règles permettent de s’assurer que le réservoir d’entropie est correctement
 rempli :
 
@@ -76,8 +76,8 @@ rempli :
     (plusieurs minutes voire heures).
     
 - La clé privée ne doit être connue que de l’entité qui cherche à prouver son identité à un
-tiers et éventuellement d’une autorité de confiance. Cette clé privée doit être dûment
-protégée pour en éviter la diffusion à une personne non autorisée.
+tiers et éventuellement d’une autorité de confiance. Cette clé privée doit être **dûment
+protégée** pour en éviter la diffusion à une personne non autorisée.
 
 - Avec ``OpenSSH``, ce contrôle se fait de plusieurs façons :
 
