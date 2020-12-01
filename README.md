@@ -53,49 +53,41 @@ Ajout de la ligne ``Protocol 2``
 **Consultez les recommandations de l'ANSSI, quelles mesures supplémentaires pourriez-vous
 prendre pour renforcer la configuration de votre serveur OpenSSH ?**
 
-- SSH doit être utilisé en lieu et place de protocoles historiques (TELNET, RSH, RLOGIN)
-pour des accès shell distants.
-- Les serveurs d’accès distants TELNET, RSH, RLOGIN doivent être désinstallés du
-système.
-- SCP ou SFTP doivent être utilisé en lieu et place de protocoles historiques (RCP, FTP)
-pour du transfert ou du téléchargement de fichier
-- La mise en place de tunnels SSH doit être strictement réservée aux protocoles n’offrant
-pas de mécanismes de sécurité robustes et pouvant en tirer un bénéfice relatif (par
-exemple : X11, VNC).
-Cette recommandation n’exclut pas l’usage de protocoles de sécurité plus bas niveau
-supplémentaire comme IPSEC (cf. "Recommandations de sécurité relatives à IPsec" sur
-www.ssi.gouv.fr).
+
+
+
 - Il faut s’assurer de la légitimité du serveur contacté avant de poursuivre l’accès. Cela
 passe par l’authentification préalable de la machine au travers de l’empreinte de sa clé
 publique, ou d’un certificat valide et vérifié.
-- L’usage de clés DSA n’est pas recommandé.
-- La taille de clé minimale doit être de 2048 bits pour RSA.
-- La taille de clé minimale doit être de 256 bits pour ECDSA.
+
 - Lorsque les clients et les serveurs SSH supportent ECDSA, son usage doit être préféré à
 RSA.
+- L’usage de clés DSA n’est pas recommandé.
 - Les clés doivent être générées dans un contexte où la source d’aléa est fiable, ou à défaut
 dans un environnement où suffisamment d’entropie a été accumulée
 - Quelques règles permettent de s’assurer que le réservoir d’entropie est correctement
 rempli :
-• la machine de génération de clés doit être une machine physique ;
-• elle doit disposer de plusieurs sources d’entropie indépendantes ;
-• l’aléa ne doit être obtenu qu’après une période d’activité suffisamment importante
-(plusieurs minutes voire heures).
+
+    • la machine de génération de clés doit être une machine physique 
+
+    • elle doit disposer de plusieurs sources d’entropie indépendantes 
+
+    • l’aléa ne doit être obtenu qu’après une période d’activité suffisamment importante
+    (plusieurs minutes voire heures).
+    
 - La clé privée ne doit être connue que de l’entité qui cherche à prouver son identité à un
 tiers et éventuellement d’une autorité de confiance. Cette clé privée doit être dûment
 protégée pour en éviter la diffusion à une personne non autorisée.
-- L’AES-128 mode CBC doit être utilisé comme algorithme de chiffrement pour la
-protection de la clé privée utilisateur par mot de passe.
 
-et au total 31 recommandations
+- Avec OpenSSH, ce contrôle se fait de plusieurs façons :
 
-Avec OpenSSH, ce contrôle se fait de plusieurs façons :
+    • en s’assurant que l’empreinte de la clé présentée par le serveur est la bonne (obtenue
+    préalablement avec ssh-keygen -l) 
 
-• en s’assurant que l’empreinte de la clé présentée par le serveur est la bonne (obtenue
-préalablement avec ssh-keygen -l) ;
-• en rajoutant la clé manuellement dans le fichier known_hosts ;
-• en vérifiant la signature du certificat présenté par le serveur avec une autorité de
-certification (AC) reconnue par le client.
+    • en rajoutant la clé manuellement dans le fichier known_hosts 
+
+    • en vérifiant la signature du certificat présenté par le serveur avec une autorité de
+    certification (AC) reconnue par le client.
 
 
 **Faites un ssh-keygen**
