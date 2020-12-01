@@ -137,6 +137,87 @@ Je vérifie en allant voir le fichier et je vois qu'une nouvelle ligne a été a
 
 ## Préparation du client UNIX/BSD 
 
+    - on génère la bi-clef sur le client linux avec une passphrase robuste : ssh-keygen
+
+**Les recommandations de l'ANSSI pour l'algorithme & la longueur aqéquate de la clef**
+
+La taille de clé minimale doit être de 2048 bits pour RSA.
+
+La taille de clé minimale doit être de 256 bits pour ECDSA.
+
+    ssh-keygen -t rsa -b 2048 -f <fichier de clé RSA>
+    ssh-keygen -t ecdsa -b 256 -f <fichier de clé ECDSA>
+
+**Vérification des générations des clefs**
+
+
+Nous avons choisis d'utiliser ECDSA pour la génération clé (privilégié par l'ANSSI). 
+Une fois la clé générée, deux fichiers apparaissent : 
+- id_ecdsa.pub 
+- id_ecdsa
+
+![](img/key.png)
+
+**Configurer les droits d'accès à la clef privée**
+
+Une clé privée d’authentification utilisateur ne doit être lisible que par l’utilisateur auquel
+elle est associée.
+
+On vérifie avec ``ls -la``
+
+![](img/key-acces.png)
+
+On a également précédemment rajouté un mot de passe sur la clé.
+
+**A quoi sert l'option ``StrictModes``**
+
+L'option est dans le fichier ``sshd_config``. Elle permet de vérifier les droits sur le dossier ./ssh/ afin d'être sûr que son accès soit protégé.
+
+**Mettre la clef publique du client sur le serveur dans ``authorized_keys``**
+
+Sur le serveur on crée le fichier authorized_keys, on lui met la clé publique du client et on lui met les bonnes permissions.
+
+![](img/pubkey.png)
+
+On passe en root (``sudo su``), on modifie le fichier ``vi /etc/ssh/sshd_config``
+
+On décommente ces lignes pour autoriser les clés mises dans le fichier ``authorized_keys``
+
+![](img/sshd_config.png)
+
+![](img/sshd_config2.png)
+
+On redémarre le service SSH pour appliquer les modifications
+
+``/etc/init.d/ssh restart``
+
+Je vérifie en me connectant :
+
+![](img/verif_ssh.png)
+
+Ca marche ! 
 
 
 ## Préparation du client Windows 
+
+**Configurer un client Windows à l'aide de [PuTTY](https://www.putty.org/)**
+
+Je génère une nouvelle clé grâce à Putty Gen
+
+![](img/putty1.png)
+
+Je copie-colle la clé publique généré et la met sur le serveur.
+
+Je sauvegarde la clé privé généré.
+
+Je crée une nouvelle session, en précisant l'IP et le port 22.
+
+Dans Connections > SSH > Auth , je place la clé privé précèdemment sauvegardé.
+
+Puis je clique sur Save puis Open.
+
+Je tape l'username sur lequel je veux me connecter (ici pierre), puis la passphrase de la clé, et me voilà connecté :
+
+![](img/putty2.png)
+
+    
