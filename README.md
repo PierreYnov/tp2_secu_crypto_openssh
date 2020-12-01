@@ -2,7 +2,7 @@
 ## Sécurisation des sessions distantes avec openssh
 
 ## Classe : B3B
-## Elèves : Emma Durand **[@emmadrd912](https://github.com/emmadrd912)** et Pierre Ceberio **[@PierreYnov](https://github.com/PierreYnov)** 
+## Élèves : Emma Durand **[@emmadrd912](https://github.com/emmadrd912)** et Pierre Ceberio **[@PierreYnov](https://github.com/PierreYnov)** 
 
 ![](https://s1.o7planning.com/fr/11409/images/7450359.jpeg)
 
@@ -25,11 +25,11 @@ Serveur Linux avec 2 clients :
 
 ## Rappels théoriques
 
-**Rappelez le fonctionnement du chiffremennt asymétrique**
+**Rappelez le fonctionnement du chiffrement asymétrique**
 
 La cryptographie asymétrique est un procédé qui intègre deux clés de chiffrement, une **clé publique** et une **clé privée**. La clé publique du destinataire est utilisée pour **chiffrer** et la clef privée du destinataire pour **déchiffrer** un message. Le même algorithme est utilisé pour les deux clefs.
 
-**Comment est assuré l'authentification ?**
+**Comment est assurée l'authentification ?**
 
 Puisqu’une clé privée unique a été utilisée pour la signature du message ou du document, son destinataire a la garantie que l'identité du signataire est légitime.
 
@@ -50,20 +50,20 @@ Passage de ``PermitRootLogin`` en ``no`` puis ``restart`` du service sshd
 Ajout de la ligne ``Protocol 2``
 
 
-**Consultez les recommandations de l'ANSSI, quelles mesures supplémentaires pourriez vous
+**Consultez les recommandations de l'ANSSI, quelles mesures supplémentaires pourriez-vous
 prendre pour renforcer la configuration de votre serveur OpenSSH ?**
 
 - SSH doit être utilisé en lieu et place de protocoles historiques (TELNET, RSH, RLOGIN)
 pour des accès shell distants.
-- Les serveurs d’accès distants TELNET, RSH, RLOGIN doivent être desinstallés du
+- Les serveurs d’accès distants TELNET, RSH, RLOGIN doivent être désinstallés du
 système.
-- SCP ou SFTP doivent être utilisés en lieu et place de protocoles historiques (RCP, FTP)
+- SCP ou SFTP doivent être utilisé en lieu et place de protocoles historiques (RCP, FTP)
 pour du transfert ou du téléchargement de fichier
 - La mise en place de tunnels SSH doit être strictement réservée aux protocoles n’offrant
 pas de mécanismes de sécurité robustes et pouvant en tirer un bénéfice relatif (par
 exemple : X11, VNC).
 Cette recommandation n’exclut pas l’usage de protocoles de sécurité plus bas niveau
-supplémentaires comme IPSEC (cf. "Recommandations de sécurité relatives à IPsec" sur
+supplémentaire comme IPSEC (cf. "Recommandations de sécurité relatives à IPsec" sur
 www.ssi.gouv.fr).
 - Il faut s’assurer de la légitimité du serveur contacté avant de poursuivre l’accès. Cela
 passe par l’authentification préalable de la machine au travers de l’empreinte de sa clé
@@ -125,21 +125,21 @@ Sur le serveur, pour obtenir le fingerprint :
 
 ``ssh-keygen -lf /etc/ssh/ssh_host_ecdsa_key.pub``
 
-On remarque que sur notre client, pendant la demande de connexion, on obtiens le même fingerprint.
+On remarque que sur notre client, pendant la demande de connexion, on obtient le même fingerprint.
 
-**Que va t-il se passer si vous acceptez la clef publique ?**
+**Que va-t-il se passer si vous acceptez la clef publique ?**
 
 Le fichier ``known_hosts`` se met à jour avec l'ajout de la clef afin de permettre sa vérification lors des prochaines visites.
 
-Je vérifie en allant voir le fichier et je vois qu'une nouvelle ligne a été ajouté : 
+Je vérifie en allant voir le fichier et je vois qu'une nouvelle ligne a été ajoutée : 
 
 ![](https://i.gyazo.com/1b84ded83061dea32af11d4d9c5d88ea.png)
 
 ## Préparation du client UNIX/BSD 
 
-    - on génère la bi-clef sur le client linux avec une passphrase robuste : ssh-keygen
+    - on génère la biclef sur le client Linux avec une passphrase robuste : ssh-keygen
 
-**Les recommandations de l'ANSSI pour l'algorithme & la longueur aqéquate de la clef**
+**Les recommandations de l'ANSSI pour l'algorithme & la longueur adéquate de la clef**
 
 La taille de clé minimale doit être de 2048 bits pour RSA.
 
@@ -151,7 +151,7 @@ La taille de clé minimale doit être de 256 bits pour ECDSA.
 **Vérification des générations des clefs**
 
 
-Nous avons choisis d'utiliser ECDSA pour la génération clé (privilégié par l'ANSSI). 
+Nous avons choisi d'utiliser ECDSA pour la génération clé (privilégié par l'ANSSI). 
 Une fois la clé générée, deux fichiers apparaissent : 
 - id_ecdsa.pub 
 - id_ecdsa
@@ -169,7 +169,7 @@ On vérifie avec ``ls -la``
 
 On a également précédemment rajouté un mot de passe sur la clé.
 
-**A quoi sert l'option ``StrictModes``**
+**À quoi sert l'option ``StrictModes``**
 
 L'option est dans le fichier ``sshd_config``. Elle permet de vérifier les droits sur le dossier ./ssh/ afin d'être sûr que son accès soit protégé.
 
@@ -181,7 +181,7 @@ Sur le serveur on crée le fichier authorized_keys, on lui met la clé publique 
 
 On passe en root (``sudo su``), on modifie le fichier ``vi /etc/ssh/sshd_config``
 
-On décommente ces lignes pour autoriser les clés mises dans le fichier ``authorized_keys``
+On dé-commente ces lignes pour autoriser les clés mises dans le fichier ``authorized_keys``
 
 ![](img/sshd_config.png)
 
@@ -195,7 +195,7 @@ Je vérifie en me connectant :
 
 ![](img/verif_ssh.png)
 
-Ca marche ! 
+Ça marche ! 
 
 
 ## Préparation du client Windows 
@@ -206,13 +206,13 @@ Je génère une nouvelle clé grâce à Putty Gen
 
 ![](img/putty1.png)
 
-Je copie-colle la clé publique généré et la met sur le serveur.
+Je copie-colle la clé publique générée et la mets sur le serveur.
 
-Je sauvegarde la clé privé généré.
+Je sauvegarde la clé privée générée.
 
 Je crée une nouvelle session, en précisant l'IP et le port 22.
 
-Dans Connections > SSH > Auth , je place la clé privé précèdemment sauvegardé.
+Dans Connections > SSH > Auth , je place la clé privée précédemment sauvegardée.
 
 Puis je clique sur Save puis Open.
 
