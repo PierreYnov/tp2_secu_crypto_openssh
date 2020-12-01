@@ -60,9 +60,9 @@ prendre pour renforcer la configuration de votre serveur OpenSSH ?**
 passe par l’authentification préalable de la machine au travers de l’empreinte de sa clé
 publique, ou d’un certificat valide et vérifié.
 
-- Lorsque les clients et les serveurs SSH supportent ECDSA, son usage doit être préféré à
-RSA.
-- L’usage de clés DSA n’est pas recommandé.
+- Lorsque les clients et les serveurs SSH supportent ``ECDSA``, son usage doit être préféré à
+``RSA``.
+- L’usage de clés ``DSA`` n’est pas recommandé.
 - Les clés doivent être générées dans un contexte où la source d’aléa est fiable, ou à défaut
 dans un environnement où suffisamment d’entropie a été accumulée
 - Quelques règles permettent de s’assurer que le réservoir d’entropie est correctement
@@ -79,7 +79,7 @@ rempli :
 tiers et éventuellement d’une autorité de confiance. Cette clé privée doit être dûment
 protégée pour en éviter la diffusion à une personne non autorisée.
 
-- Avec OpenSSH, ce contrôle se fait de plusieurs façons :
+- Avec ``OpenSSH``, ce contrôle se fait de plusieurs façons :
 
     • en s’assurant que l’empreinte de la clé présentée par le serveur est la bonne (obtenue
     préalablement avec ssh-keygen -l) 
@@ -105,8 +105,8 @@ On se connecte avec ``ssh pierre@192.168.1.24`` et répond ``no``
 
 **Expliquez pourquoi le système vous pose cette question**
 
-OpenSSH adopte par défaut un modèle de sécurité Trust On First Use (TOFU) : lors de la première
-connexion et à défaut de pouvoir authentifier l’hôte, ssh demande confirmation à l’utilisateur qu’il
+``OpenSSH`` adopte par défaut un modèle de sécurité *Trust On First Use (TOFU)* : lors de la première
+connexion et à défaut de pouvoir authentifier l’hôte, ``ssh`` demande confirmation à l’utilisateur qu’il
 s’agit bien de la bonne clé (via son empreinte). Si l’utilisateur confirme que l’empreinte est bonne, ssh
 procèdera à son enregistrement dans le fichier ``known_hosts`` afin de permettre sa vérification lors des
 visites suivantes.
@@ -133,9 +133,9 @@ Je vérifie en allant voir le fichier et je vois qu'une nouvelle ligne a été a
 
 **Les recommandations de l'ANSSI pour l'algorithme & la longueur adéquate de la clef**
 
-La taille de clé minimale doit être de 2048 bits pour RSA.
+La taille de clé minimale doit être de **2048 bits** pour ``RSA``.
 
-La taille de clé minimale doit être de 256 bits pour ECDSA.
+La taille de clé minimale doit être de **256 bits** pour ``ECDSA``.
 
     ssh-keygen -t rsa -b 2048 -f <fichier de clé RSA>
     ssh-keygen -t ecdsa -b 256 -f <fichier de clé ECDSA>
@@ -143,7 +143,7 @@ La taille de clé minimale doit être de 256 bits pour ECDSA.
 **Vérification des générations des clefs**
 
 
-Nous avons choisi d'utiliser ECDSA pour la génération clé (privilégié par l'ANSSI). 
+Nous avons choisi d'utiliser ``ECDSA`` pour la génération clé (privilégié par l'ANSSI). 
 Une fois la clé générée, deux fichiers apparaissent : 
 - id_ecdsa.pub 
 - id_ecdsa
@@ -163,15 +163,15 @@ On a également précédemment rajouté un mot de passe sur la clé.
 
 **À quoi sert l'option ``StrictModes``**
 
-L'option est dans le fichier ``sshd_config``. Elle permet de vérifier les droits sur le dossier ./ssh/ afin d'être sûr que son accès soit protégé.
+L'option est dans le fichier ``sshd_config``. Elle permet de vérifier les droits sur le dossier ``./ssh/`` afin d'être sûr que son accès soit protégé.
 
 **Mettre la clef publique du client sur le serveur dans ``authorized_keys``**
 
-Sur le serveur on crée le fichier authorized_keys, on lui met la clé publique du client et on lui met les bonnes permissions.
+Sur le serveur on crée le fichier ``authorized_keys``, on lui met la clé publique du client et on lui met les bonnes permissions.
 
 ![](img/pubkey.png)
 
-On passe en root (``sudo su``), on modifie le fichier ``vi /etc/ssh/sshd_config``
+On passe en ``root`` (``sudo su``), on modifie le fichier ``vi /etc/ssh/sshd_config``
 
 On dé-commente ces lignes pour autoriser les clés mises dans le fichier ``authorized_keys``
 
@@ -179,7 +179,7 @@ On dé-commente ces lignes pour autoriser les clés mises dans le fichier ``auth
 
 ![](img/sshd_config2.png)
 
-On redémarre le service SSH pour appliquer les modifications
+On redémarre le service ``SSH`` pour appliquer les modifications
 
 ``/etc/init.d/ssh restart``
 
@@ -194,7 +194,7 @@ Je vérifie en me connectant :
 
 **Configurer un client Windows à l'aide de [PuTTY](https://www.putty.org/)**
 
-Je génère une nouvelle clé grâce à Putty Gen
+Je génère une nouvelle clé grâce à ``Putty Gen``.
 
 ![](img/putty1.png)
 
@@ -204,11 +204,11 @@ Je sauvegarde la clé privée générée.
 
 Je crée une nouvelle session, en précisant l'IP et le port 22.
 
-Dans Connections > SSH > Auth , je place la clé privée précédemment sauvegardée.
+Dans ``Connections > SSH > Auth`` , je place la clé privée précédemment sauvegardée.
 
-Puis je clique sur Save puis Open.
+Puis je clique sur ``Save`` puis ``Open``.
 
-Je tape l'username sur lequel je veux me connecter (ici pierre), puis la passphrase de la clé, et me voilà connecté :
+Je tape l'username sur lequel je veux me connecter (ici ``pierre``), puis la passphrase de la clé, et me voilà connecté :
 
 ![](img/putty2.png)
 
